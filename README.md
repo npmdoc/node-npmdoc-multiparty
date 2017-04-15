@@ -1,11 +1,13 @@
 # api documentation for  [multiparty (v4.1.3)](https://github.com/pillarjs/multiparty#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-multiparty.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-multiparty) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-multiparty.svg)](https://travis-ci.org/npmdoc/node-npmdoc-multiparty)
 #### multipart/form-data parser which supports streaming
 
-[![NPM](https://nodei.co/npm/multiparty.png?downloads=true)](https://www.npmjs.com/package/multiparty)
+[![NPM](https://nodei.co/npm/multiparty.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/multiparty)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-multiparty/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-multiparty_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-multiparty/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-multiparty/build/screenCapture.buildCi.browser.apidoc.html.png)](https://npmdoc.github.io/node-npmdoc-multiparty/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-multiparty/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-multiparty/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-multiparty/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -15,8 +17,7 @@
 
 {
     "author": {
-        "name": "Andrew Kelley",
-        "email": "superjoe30@gmail.com"
+        "name": "Andrew Kelley"
     },
     "bugs": {
         "url": "https://github.com/pillarjs/multiparty/issues"
@@ -57,17 +58,14 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "superjoe",
-            "email": "superjoe30@gmail.com"
+            "name": "superjoe"
         },
         {
-            "name": "dougwilson",
-            "email": "doug@somethingdoug.com"
+            "name": "dougwilson"
         }
     ],
     "name": "multiparty",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+ssh://git@github.com/pillarjs/multiparty.git"
