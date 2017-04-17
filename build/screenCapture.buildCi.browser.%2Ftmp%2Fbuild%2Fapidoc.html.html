@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/pillarjs/multiparty#readme"
-
-    >multiparty (v4.1.3)</a>
+    <a href="https://github.com/pillarjs/multiparty#readme">multiparty (v4.1.3)</a>
 </h1>
 <h4>multipart/form-data parser which supports streaming</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.multiparty">module multiparty</a><ol>
 
@@ -411,7 +404,7 @@
   self.maxFieldsSize = options.maxFieldsSize || 2 * 1024 * 1024;
   self.maxFilesSize = options.maxFilesSize || Infinity;
   self.uploadDir = options.uploadDir || os.tmpdir();
-  self.encoding = options.encoding || &#x27;utf8&#x27;;
+  self.encoding = options.encoding || 'utf8';
 
   self.bytesReceived = 0;
   self.bytesExpected = null;
@@ -427,27 +420,27 @@
 
   self.emitQueue = [];
 
-  self.on(&#x27;newListener&#x27;, function(eventName) {
-    if (eventName === &#x27;file&#x27;) {
+  self.on('newListener', function(eventName) {
+    if (eventName === 'file') {
       self.autoFiles = true;
-    } else if (eventName === &#x27;field&#x27;) {
+    } else if (eventName === 'field') {
       self.autoFields = true;
     }
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var multiparty = require(&#x27;multiparty&#x27;);
-var http = require(&#x27;http&#x27;);
-var util = require(&#x27;util&#x27;);
+var multiparty = require('multiparty');
+var http = require('http');
+var util = require('util');
 
 http.createServer(function(req, res) {
-  if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;) {
+  if (req.url === '/upload' &amp;&amp; req.method === 'POST') {
 // parse a file upload
 var form = new multiparty.<span class="apidocCodeKeywordSpan">Form</span>();
 
 form.parse(req, function(err, fields, files) {
-  res.writeHead(200, {&#x27;content-type&#x27;: &#x27;text/plain&#x27;});
-  res.write(&#x27;received upload:\n\n&#x27;);
+  res.writeHead(200, {'content-type': 'text/plain'});
+  res.write('received upload:\n\n');
   res.end(util.inspect({fields: fields, files: files}));
 });
 ...</pre></li>
@@ -480,7 +473,7 @@ form.parse(req, function(err, fields, files) {
   var c;
   var cl;
 
-  for (i = 0; i &#x3c; len; i++) {
+  for (i = 0; i &lt; len; i++) {
     c = buffer[i];
     switch (state) {
       case START:
@@ -488,16 +481,16 @@ form.parse(req, function(err, fields, files) {
         state = START_BOUNDARY;
 <span class="apidocCodeCommentSpan">        /* falls through */
 </span>      case START_BOUNDARY:
-        if (index === boundaryLength - 2 &#x26;&#x26; c === HYPHEN) {
+        if (index === boundaryLength - 2 &amp;&amp; c === HYPHEN) {
           index = 1;
           state = CLOSE_BOUNDARY;
           break;
         } else if (index === boundaryLength - 2) {
-          if (c !== CR) return self.handleError(createError(400, &#x27;Expected CR Received &#x27; + c));
+          if (c !== CR) return self.handleError(createError(400, 'Expected CR Received ' + c));
           index++;
           break;
         } else if (index === boundaryLength - 1) {
-          if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+          if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
           index = 0;
           self.onParsePartBegin();
           state = HEADER_FIELD_START;
@@ -525,7 +518,7 @@ form.parse(req, function(err, fields, files) {
         if (c === COLON) {
           if (index === 1) {
             // empty header field
-            self.handleError(createError(400, &#x27;Empty header field&#x27;));
+            self.handleError(createError(400, 'Empty header field'));
             return;
           }
           self.onParseHeaderField(buffer.slice(self.headerFieldMark, i));
@@ -535,8 +528,8 @@ form.parse(req, function(err, fields, files) {
         }
 
         cl = lower(c);
-        if (cl &#x3c; A || cl &#x3e; Z) {
-          self.handleError(createError(400, &#x27;Expected alphabetic character, received &#x27; + c));
+        if (cl &lt; A || cl &gt; Z) {
+          self.handleError(createError(400, 'Expected alphabetic character, received ' + c));
           return;
         }
         break;
@@ -555,11 +548,11 @@ form.parse(req, function(err, fields, files) {
         }
         break;
       case HEADER_VALUE_ALMOST_DONE:
-        if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+        if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
         state = HEADER_FIELD_START;
         break;
       case HEADERS_ALMOST_DONE:
-        if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+        if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
         var err = self.onParseHeadersEnd(i + 1);
         if (err) return self.handleError(err);
         state = PART_DATA_START;
@@ -574,14 +567,14 @@ form.parse(req, function(err, fields, files) {
         if (index === 0) {
           // boyer-moore derrived algorithm to safely skip non-boundary data
           i += boundaryEnd;
-          while (i &#x3c; bufferLength &#x26;&#x26; !(buffer[i] in boundaryChars)) {
+          while (i &lt; bufferLength &amp;&amp; !(buffer[i] in boundaryChars)) {
             i += boundaryLength;
           }
           i -= boundaryEnd;
           c = buffer[i];
         }
 
-        if (index &#x3c; boundaryLength) {
+        if (index &lt; boundaryLength) {
           if (boundary[index] === c) {
             if (index === 0) {
               self.onParsePartData(buffer.slice(self.partDataMark, i));
@@ -614,19 +607,19 @@ form.parse(req, function(err, fields, files) {
   this.partHeaders[this.headerField] = this.headerValue;
 
   var m;
-  if (this.headerField === &#x27;content-disposition&#x27;) {
-    if (m = this.headerValue.match(/\bname=&#x22;([^&#x22;]+)&#x22;/i)) {
+  if (this.headerField === 'content-disposition') {
+    if (m = this.headerValue.match(/\bname="([^"]+)"/i)) {
       this.partName = m[1];
     }
     this.partFilename = parseFilename(this.headerValue);
-  } else if (this.headerField === &#x27;content-transfer-encoding&#x27;) {
+  } else if (this.headerField === 'content-transfer-encoding') {
     this.partTransferEncoding = this.headerValue.toLowerCase();
   }
 
   this.headerFieldDecoder = new StringDecoder(this.encoding);
-  this.headerField = &#x27;&#x27;;
+  this.headerField = '';
   this.headerValueDecoder = new StringDecoder(this.encoding);
-  this.headerValue = &#x27;&#x27;;
+  this.headerValue = '';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -673,39 +666,39 @@ form.parse(req, function(err, fields, files) {
     <li>description and source-code<pre class="apidocCodePre">Form.prototype.onParseHeadersEnd = function (offset) {
   var self = this;
   switch(self.partTransferEncoding){
-    case &#x27;binary&#x27;:
-    case &#x27;7bit&#x27;:
-    case &#x27;8bit&#x27;:
-    self.partTransferEncoding = &#x27;binary&#x27;;
+    case 'binary':
+    case '7bit':
+    case '8bit':
+    self.partTransferEncoding = 'binary';
     break;
 
-    case &#x27;base64&#x27;: break;
+    case 'base64': break;
     default:
-    return createError(400, &#x27;unknown transfer-encoding: &#x27; + self.partTransferEncoding);
+    return createError(400, 'unknown transfer-encoding: ' + self.partTransferEncoding);
   }
 
   self.totalFieldCount += 1;
-  if (self.totalFieldCount &#x3e; self.maxFields) {
-    return createError(413, &#x27;maxFields &#x27; + self.maxFields + &#x27; exceeded.&#x27;);
+  if (self.totalFieldCount &gt; self.maxFields) {
+    return createError(413, 'maxFields ' + self.maxFields + ' exceeded.');
   }
 
   self.destStream = new stream.PassThrough();
-  self.destStream.on(&#x27;drain&#x27;, function() {
+  self.destStream.on('drain', function() {
     flushWriteCbs(self);
   });
   self.destStream.headers = self.partHeaders;
   self.destStream.name = self.partName;
   self.destStream.filename = self.partFilename;
   self.destStream.byteOffset = self.bytesReceived + offset;
-  var partContentLength = self.destStream.headers[&#x27;content-length&#x27;];
+  var partContentLength = self.destStream.headers['content-length'];
   self.destStream.byteCount = partContentLength ? parseInt(partContentLength, 10) :
     self.bytesExpected ? (self.bytesExpected - self.destStream.byteOffset -
       self.boundary.length - LAST_BOUNDARY_SUFFIX_LEN) :
     undefined;
 
-  if (self.destStream.filename == null &#x26;&#x26; self.autoFields) {
+  if (self.destStream.filename == null &amp;&amp; self.autoFields) {
     handleField(self, self.destStream);
-  } else if (self.destStream.filename != null &#x26;&#x26; self.autoFiles) {
+  } else if (self.destStream.filename != null &amp;&amp; self.autoFiles) {
     handleFile(self, self.destStream);
   } else {
     handlePart(self, self.destStream);
@@ -739,8 +732,8 @@ form.parse(req, function(err, fields, files) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Form.prototype.onParsePartData = function (b) {
-  if (this.partTransferEncoding === &#x27;base64&#x27;) {
-    this.backpressure = ! this.destStream.write(b.toString(&#x27;ascii&#x27;), &#x27;base64&#x27;);
+  if (this.partTransferEncoding === 'base64') {
+    this.backpressure = ! this.destStream.write(b.toString('ascii'), 'base64');
   } else {
     this.backpressure = ! this.destStream.write(b);
   }
@@ -797,10 +790,10 @@ form.parse(req, function(err, fields, files) {
 
       // wait for req events to fire
       process.nextTick(function() {
-        if (waitend &#x26;&#x26; req.readable) {
+        if (waitend &amp;&amp; req.readable) {
           // dump rest of request
           req.resume();
-          req.once(&#x27;end&#x27;, done);
+          req.once('end', done);
           return;
         }
 
@@ -810,20 +803,20 @@ form.parse(req, function(err, fields, files) {
 
     var fields = {};
     var files = {};
-    self.on(&#x27;error&#x27;, function(err) {
+    self.on('error', function(err) {
       end(function() {
         cb(err);
       });
     });
-    self.on(&#x27;field&#x27;, function(name, value) {
+    self.on('field', function(name, value) {
       var fieldsArray = fields[name] || (fields[name] = []);
       fieldsArray.push(value);
     });
-    self.on(&#x27;file&#x27;, function(name, file) {
+    self.on('file', function(name, file) {
       var filesArray = files[name] || (files[name] = []);
       filesArray.push(file);
     });
-    self.on(&#x27;close&#x27;, function() {
+    self.on('close', function() {
       end(function() {
         cb(null, fields, files);
       });
@@ -833,43 +826,43 @@ form.parse(req, function(err, fields, files) {
   self.handleError = handleError;
   self.bytesExpected = getBytesExpected(req.headers);
 
-  req.on(&#x27;end&#x27;, onReqEnd);
-  req.on(&#x27;error&#x27;, function(err) {
+  req.on('end', onReqEnd);
+  req.on('error', function(err) {
     waitend = false;
     handleError(err);
   });
-  req.on(&#x27;aborted&#x27;, onReqAborted);
+  req.on('aborted', onReqAborted);
 
   var state = req._readableState;
-  if (req._decoder || (state &#x26;&#x26; (state.encoding || state.decoder))) {
+  if (req._decoder || (state &amp;&amp; (state.encoding || state.decoder))) {
     // this is a binary protocol
     // if an encoding is set, input is likely corrupted
-    validationError(new Error(&#x27;request encoding must not be set&#x27;));
+    validationError(new Error('request encoding must not be set'));
     return;
   }
 
-  var contentType = req.headers[&#x27;content-type&#x27;];
+  var contentType = req.headers['content-type'];
   if (!contentType) {
-    validationError(createError(415, &#x27;missing content-type header&#x27;));
+    validationError(createError(415, 'missing content-type header'));
     return;
   }
 
   var m = CONTENT_TYPE_RE.exec(contentType);
   if (!m) {
-    validationError(createError(415, &#x27;unsupported content-type&#x27;));
+    validationError(createError(415, 'unsupported content-type'));
     return;
   }
 
   var boundary;
   CONTENT_TYPE_PARAM_RE.lastIndex = m.index + m[0].length - 1;
   while ((m = CONTENT_TYPE_PARAM_RE.exec(contentType))) {
-    if (m[1].toLowerCase() !== &#x27;boundary&#x27;) continue;
+    if (m[1].toLowerCase() !== 'boundary') continue;
     boundary = m[2] || m[3];
     break;
   }
 
   if (!boundary) {
-    validationError(createError(400, &#x27;content-type missing boundary&#x27;));
+    validationError(createError(400, 'content-type missing boundary'));
     return;
   }
 
@@ -878,8 +871,8 @@ form.parse(req, function(err, fields, files) {
 
   function onReqAborted() {
     waitend = false;
-    self.emit(&#x27;aborted&#x27;);
-    handleError(new Error(&#x22;Request aborted&#x22;));
+    self.emit('aborted');
+    handleError(new Error("Request aborted"));
   }
 
   function onReqEnd() {
@@ -890,8 +883,8 @@ form.parse(req, function(err, fields, files) {
     var first = !self.error;
     if (first) {
       self.error = err;
-      req.removeListener(&#x27;aborted&#x27;, onReqAborted);
-      req.removeListener(&#x27;end&#x27;, onReqEnd);
+      req.removeListener('aborted', onReqAborted);
+      req.removeListener('end', onReqEnd);
       if (self.destStream) {
         errorEventQueue(self, self.destStream, err);
       }
@@ -900,7 +893,7 @@ form.parse(req, function(err, fields, files) {
     cleanupOpenFiles(self);
 
     if (first) {
-      self.emit(&#x27;error&#x27;, err);
+      self.emit('error', err);
     }
   }
 
@@ -943,7 +936,7 @@ form.parse(req, function(err, fields, files) {
   self.maxFieldsSize = options.maxFieldsSize || 2 * 1024 * 1024;
   self.maxFilesSize = options.maxFilesSize || Infinity;
   self.uploadDir = options.uploadDir || os.tmpdir();
-  self.encoding = options.encoding || &#x27;utf8&#x27;;
+  self.encoding = options.encoding || 'utf8';
 
   self.bytesReceived = 0;
   self.bytesExpected = null;
@@ -959,27 +952,27 @@ form.parse(req, function(err, fields, files) {
 
   self.emitQueue = [];
 
-  self.on(&#x27;newListener&#x27;, function(eventName) {
-    if (eventName === &#x27;file&#x27;) {
+  self.on('newListener', function(eventName) {
+    if (eventName === 'file') {
       self.autoFiles = true;
-    } else if (eventName === &#x27;field&#x27;) {
+    } else if (eventName === 'field') {
       self.autoFields = true;
     }
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var multiparty = require(&#x27;multiparty&#x27;);
-var http = require(&#x27;http&#x27;);
-var util = require(&#x27;util&#x27;);
+var multiparty = require('multiparty');
+var http = require('http');
+var util = require('util');
 
 http.createServer(function(req, res) {
-  if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;) {
+  if (req.url === '/upload' &amp;&amp; req.method === 'POST') {
 // parse a file upload
 var form = new multiparty.<span class="apidocCodeKeywordSpan">Form</span>();
 
 form.parse(req, function(err, fields, files) {
-  res.writeHead(200, {&#x27;content-type&#x27;: &#x27;text/plain&#x27;});
-  res.write(&#x27;received upload:\n\n&#x27;);
+  res.writeHead(200, {'content-type': 'text/plain'});
+  res.write('received upload:\n\n');
   res.end(util.inspect({fields: fields, files: files}));
 });
 ...</pre></li>
@@ -1002,7 +995,7 @@ form.parse(req, function(err, fields, files) {
   // Trying to use the custom `instanceof` for Writable here will also break the
   // Node.js LazyTransform implementation, which has a non-trivial getter for
   // `_writableState` that would lead to infinite recursion.
-  if (!(realHasInstance.call(Writable, this)) &#x26;&#x26;
+  if (!(realHasInstance.call(Writable, this)) &amp;&amp;
       !(this instanceof Stream.Duplex)) {
     return new Writable(options);
   }
@@ -1013,10 +1006,10 @@ form.parse(req, function(err, fields, files) {
   this.writable = true;
 
   if (options) {
-    if (typeof options.write === &#x27;function&#x27;)
+    if (typeof options.write === 'function')
       this._write = options.write;
 
-    if (typeof options.writev === &#x27;function&#x27;)
+    if (typeof options.writev === 'function')
       this._writev = options.writev;
   }
 
@@ -1057,7 +1050,7 @@ form.parse(req, function(err, fields, files) {
   var c;
   var cl;
 
-  for (i = 0; i &#x3c; len; i++) {
+  for (i = 0; i &lt; len; i++) {
     c = buffer[i];
     switch (state) {
       case START:
@@ -1065,16 +1058,16 @@ form.parse(req, function(err, fields, files) {
         state = START_BOUNDARY;
 <span class="apidocCodeCommentSpan">        /* falls through */
 </span>      case START_BOUNDARY:
-        if (index === boundaryLength - 2 &#x26;&#x26; c === HYPHEN) {
+        if (index === boundaryLength - 2 &amp;&amp; c === HYPHEN) {
           index = 1;
           state = CLOSE_BOUNDARY;
           break;
         } else if (index === boundaryLength - 2) {
-          if (c !== CR) return self.handleError(createError(400, &#x27;Expected CR Received &#x27; + c));
+          if (c !== CR) return self.handleError(createError(400, 'Expected CR Received ' + c));
           index++;
           break;
         } else if (index === boundaryLength - 1) {
-          if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+          if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
           index = 0;
           self.onParsePartBegin();
           state = HEADER_FIELD_START;
@@ -1102,7 +1095,7 @@ form.parse(req, function(err, fields, files) {
         if (c === COLON) {
           if (index === 1) {
             // empty header field
-            self.handleError(createError(400, &#x27;Empty header field&#x27;));
+            self.handleError(createError(400, 'Empty header field'));
             return;
           }
           self.onParseHeaderField(buffer.slice(self.headerFieldMark, i));
@@ -1112,8 +1105,8 @@ form.parse(req, function(err, fields, files) {
         }
 
         cl = lower(c);
-        if (cl &#x3c; A || cl &#x3e; Z) {
-          self.handleError(createError(400, &#x27;Expected alphabetic character, received &#x27; + c));
+        if (cl &lt; A || cl &gt; Z) {
+          self.handleError(createError(400, 'Expected alphabetic character, received ' + c));
           return;
         }
         break;
@@ -1132,11 +1125,11 @@ form.parse(req, function(err, fields, files) {
         }
         break;
       case HEADER_VALUE_ALMOST_DONE:
-        if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+        if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
         state = HEADER_FIELD_START;
         break;
       case HEADERS_ALMOST_DONE:
-        if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+        if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
         var err = self.onParseHeadersEnd(i + 1);
         if (err) return self.handleError(err);
         state = PART_DATA_START;
@@ -1151,14 +1144,14 @@ form.parse(req, function(err, fields, files) {
         if (index === 0) {
           // boyer-moore derrived algorithm to safely skip non-boundary data
           i += boundaryEnd;
-          while (i &#x3c; bufferLength &#x26;&#x26; !(buffer[i] in boundaryChars)) {
+          while (i &lt; bufferLength &amp;&amp; !(buffer[i] in boundaryChars)) {
             i += boundaryLength;
           }
           i -= boundaryEnd;
           c = buffer[i];
         }
 
-        if (index &#x3c; boundaryLength) {
+        if (index &lt; boundaryLength) {
           if (boundary[index] === c) {
             if (index === 0) {
               self.onParsePartData(buffer.slice(self.partDataMark, i));
@@ -1191,19 +1184,19 @@ form.parse(req, function(err, fields, files) {
   this.partHeaders[this.headerField] = this.headerValue;
 
   var m;
-  if (this.headerField === &#x27;content-disposition&#x27;) {
-    if (m = this.headerValue.match(/\bname=&#x22;([^&#x22;]+)&#x22;/i)) {
+  if (this.headerField === 'content-disposition') {
+    if (m = this.headerValue.match(/\bname="([^"]+)"/i)) {
       this.partName = m[1];
     }
     this.partFilename = parseFilename(this.headerValue);
-  } else if (this.headerField === &#x27;content-transfer-encoding&#x27;) {
+  } else if (this.headerField === 'content-transfer-encoding') {
     this.partTransferEncoding = this.headerValue.toLowerCase();
   }
 
   this.headerFieldDecoder = new StringDecoder(this.encoding);
-  this.headerField = &#x27;&#x27;;
+  this.headerField = '';
   this.headerValueDecoder = new StringDecoder(this.encoding);
-  this.headerValue = &#x27;&#x27;;
+  this.headerValue = '';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   self.headerValueMark = i;
@@ -1218,7 +1211,7 @@ case HEADER_VALUE:
   }
   break;
 case HEADER_VALUE_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   state = HEADER_FIELD_START;
   break;
 ...</pre></li>
@@ -1241,7 +1234,7 @@ case HEADER_VALUE_ALMOST_DONE:
 if (c === COLON) {
   if (index === 1) {
     // empty header field
-    self.handleError(createError(400, &#x27;Empty header field&#x27;));
+    self.handleError(createError(400, 'Empty header field'));
     return;
   }
   self.<span class="apidocCodeKeywordSpan">onParseHeaderField</span>(buffer.slice(self.headerFieldMark, i));
@@ -1251,7 +1244,7 @@ if (c === COLON) {
 }
 
 cl = lower(c);
-if (cl &#x3c; A || cl &#x3e; Z) {
+if (cl &lt; A || cl &gt; Z) {
 ...</pre></li>
     </ul>
 
@@ -1282,7 +1275,7 @@ case HEADER_VALUE:
   }
   break;
 case HEADER_VALUE_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
 ...</pre></li>
     </ul>
 
@@ -1298,39 +1291,39 @@ case HEADER_VALUE_ALMOST_DONE:
     <li>description and source-code<pre class="apidocCodePre">onParseHeadersEnd = function (offset) {
   var self = this;
   switch(self.partTransferEncoding){
-    case &#x27;binary&#x27;:
-    case &#x27;7bit&#x27;:
-    case &#x27;8bit&#x27;:
-    self.partTransferEncoding = &#x27;binary&#x27;;
+    case 'binary':
+    case '7bit':
+    case '8bit':
+    self.partTransferEncoding = 'binary';
     break;
 
-    case &#x27;base64&#x27;: break;
+    case 'base64': break;
     default:
-    return createError(400, &#x27;unknown transfer-encoding: &#x27; + self.partTransferEncoding);
+    return createError(400, 'unknown transfer-encoding: ' + self.partTransferEncoding);
   }
 
   self.totalFieldCount += 1;
-  if (self.totalFieldCount &#x3e; self.maxFields) {
-    return createError(413, &#x27;maxFields &#x27; + self.maxFields + &#x27; exceeded.&#x27;);
+  if (self.totalFieldCount &gt; self.maxFields) {
+    return createError(413, 'maxFields ' + self.maxFields + ' exceeded.');
   }
 
   self.destStream = new stream.PassThrough();
-  self.destStream.on(&#x27;drain&#x27;, function() {
+  self.destStream.on('drain', function() {
     flushWriteCbs(self);
   });
   self.destStream.headers = self.partHeaders;
   self.destStream.name = self.partName;
   self.destStream.filename = self.partFilename;
   self.destStream.byteOffset = self.bytesReceived + offset;
-  var partContentLength = self.destStream.headers[&#x27;content-length&#x27;];
+  var partContentLength = self.destStream.headers['content-length'];
   self.destStream.byteCount = partContentLength ? parseInt(partContentLength, 10) :
     self.bytesExpected ? (self.bytesExpected - self.destStream.byteOffset -
       self.boundary.length - LAST_BOUNDARY_SUFFIX_LEN) :
     undefined;
 
-  if (self.destStream.filename == null &#x26;&#x26; self.autoFields) {
+  if (self.destStream.filename == null &amp;&amp; self.autoFields) {
     handleField(self, self.destStream);
-  } else if (self.destStream.filename != null &#x26;&#x26; self.autoFiles) {
+  } else if (self.destStream.filename != null &amp;&amp; self.autoFiles) {
     handleFile(self, self.destStream);
   } else {
     handlePart(self, self.destStream);
@@ -1339,11 +1332,11 @@ case HEADER_VALUE_ALMOST_DONE:
     <li>example usage<pre class="apidocCodePre">...
   break;
 case HEADER_VALUE_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   state = HEADER_FIELD_START;
   break;
 case HEADERS_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   var err = self.<span class="apidocCodeKeywordSpan">onParseHeadersEnd</span>(i + 1);
   if (err) return self.handleError(err);
   state = PART_DATA_START;
@@ -1369,11 +1362,11 @@ case PART_DATA_START:
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 } else if (index === boundaryLength - 2) {
-  if (c !== CR) return self.handleError(createError(400, &#x27;Expected CR Received &#x27; + c));
+  if (c !== CR) return self.handleError(createError(400, 'Expected CR Received ' + c));
   index++;
   break;
 } else if (index === boundaryLength - 1) {
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   index = 0;
   self.<span class="apidocCodeKeywordSpan">onParsePartBegin</span>();
   state = HEADER_FIELD_START;
@@ -1396,8 +1389,8 @@ break;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">onParsePartData = function (b) {
-  if (this.partTransferEncoding === &#x27;base64&#x27;) {
-    this.backpressure = ! this.destStream.write(b.toString(&#x27;ascii&#x27;), &#x27;base64&#x27;);
+  if (this.partTransferEncoding === 'base64') {
+    this.backpressure = ! this.destStream.write(b.toString('ascii'), 'base64');
   } else {
     this.backpressure = ! this.destStream.write(b);
   }
@@ -1407,7 +1400,7 @@ break;
   c = buffer[i];
 }
 
-if (index &#x3c; boundaryLength) {
+if (index &lt; boundaryLength) {
   if (boundary[index] === c) {
     if (index === 0) {
       self.<span class="apidocCodeKeywordSpan">onParsePartData</span>(buffer.slice(self.partDataMark, i));
@@ -1486,10 +1479,10 @@ if (index &#x3c; boundaryLength) {
 
       // wait for req events to fire
       process.nextTick(function() {
-        if (waitend &#x26;&#x26; req.readable) {
+        if (waitend &amp;&amp; req.readable) {
           // dump rest of request
           req.resume();
-          req.once(&#x27;end&#x27;, done);
+          req.once('end', done);
           return;
         }
 
@@ -1499,20 +1492,20 @@ if (index &#x3c; boundaryLength) {
 
     var fields = {};
     var files = {};
-    self.on(&#x27;error&#x27;, function(err) {
+    self.on('error', function(err) {
       end(function() {
         cb(err);
       });
     });
-    self.on(&#x27;field&#x27;, function(name, value) {
+    self.on('field', function(name, value) {
       var fieldsArray = fields[name] || (fields[name] = []);
       fieldsArray.push(value);
     });
-    self.on(&#x27;file&#x27;, function(name, file) {
+    self.on('file', function(name, file) {
       var filesArray = files[name] || (files[name] = []);
       filesArray.push(file);
     });
-    self.on(&#x27;close&#x27;, function() {
+    self.on('close', function() {
       end(function() {
         cb(null, fields, files);
       });
@@ -1522,43 +1515,43 @@ if (index &#x3c; boundaryLength) {
   self.handleError = handleError;
   self.bytesExpected = getBytesExpected(req.headers);
 
-  req.on(&#x27;end&#x27;, onReqEnd);
-  req.on(&#x27;error&#x27;, function(err) {
+  req.on('end', onReqEnd);
+  req.on('error', function(err) {
     waitend = false;
     handleError(err);
   });
-  req.on(&#x27;aborted&#x27;, onReqAborted);
+  req.on('aborted', onReqAborted);
 
   var state = req._readableState;
-  if (req._decoder || (state &#x26;&#x26; (state.encoding || state.decoder))) {
+  if (req._decoder || (state &amp;&amp; (state.encoding || state.decoder))) {
     // this is a binary protocol
     // if an encoding is set, input is likely corrupted
-    validationError(new Error(&#x27;request encoding must not be set&#x27;));
+    validationError(new Error('request encoding must not be set'));
     return;
   }
 
-  var contentType = req.headers[&#x27;content-type&#x27;];
+  var contentType = req.headers['content-type'];
   if (!contentType) {
-    validationError(createError(415, &#x27;missing content-type header&#x27;));
+    validationError(createError(415, 'missing content-type header'));
     return;
   }
 
   var m = CONTENT_TYPE_RE.exec(contentType);
   if (!m) {
-    validationError(createError(415, &#x27;unsupported content-type&#x27;));
+    validationError(createError(415, 'unsupported content-type'));
     return;
   }
 
   var boundary;
   CONTENT_TYPE_PARAM_RE.lastIndex = m.index + m[0].length - 1;
   while ((m = CONTENT_TYPE_PARAM_RE.exec(contentType))) {
-    if (m[1].toLowerCase() !== &#x27;boundary&#x27;) continue;
+    if (m[1].toLowerCase() !== 'boundary') continue;
     boundary = m[2] || m[3];
     break;
   }
 
   if (!boundary) {
-    validationError(createError(400, &#x27;content-type missing boundary&#x27;));
+    validationError(createError(400, 'content-type missing boundary'));
     return;
   }
 
@@ -1567,8 +1560,8 @@ if (index &#x3c; boundaryLength) {
 
   function onReqAborted() {
     waitend = false;
-    self.emit(&#x27;aborted&#x27;);
-    handleError(new Error(&#x22;Request aborted&#x22;));
+    self.emit('aborted');
+    handleError(new Error("Request aborted"));
   }
 
   function onReqEnd() {
@@ -1579,8 +1572,8 @@ if (index &#x3c; boundaryLength) {
     var first = !self.error;
     if (first) {
       self.error = err;
-      req.removeListener(&#x27;aborted&#x27;, onReqAborted);
-      req.removeListener(&#x27;end&#x27;, onReqEnd);
+      req.removeListener('aborted', onReqAborted);
+      req.removeListener('end', onReqEnd);
       if (self.destStream) {
         errorEventQueue(self, self.destStream, err);
       }
@@ -1589,7 +1582,7 @@ if (index &#x3c; boundaryLength) {
     cleanupOpenFiles(self);
 
     if (first) {
-      self.emit(&#x27;error&#x27;, err);
+      self.emit('error', err);
     }
   }
 
@@ -1599,16 +1592,16 @@ if (index &#x3c; boundaryLength) {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var util = require(&#x27;util&#x27;);
+var util = require('util');
 
 http.createServer(function(req, res) {
-if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;) {
+if (req.url === '/upload' &amp;&amp; req.method === 'POST') {
   // parse a file upload
   var form = new multiparty.Form();
 
   form.<span class="apidocCodeKeywordSpan">parse</span>(req, function(err, fields, files) {
-    res.writeHead(200, {&#x27;content-type&#x27;: &#x27;text/plain&#x27;});
-    res.write(&#x27;received upload:\n\n&#x27;);
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.write('received upload:\n\n');
     res.end(util.inspect({fields: fields, files: files}));
   });
 
@@ -1649,7 +1642,7 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
   var c;
   var cl;
 
-  for (i = 0; i &#x3c; len; i++) {
+  for (i = 0; i &lt; len; i++) {
     c = buffer[i];
     switch (state) {
       case START:
@@ -1657,16 +1650,16 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
         state = START_BOUNDARY;
 <span class="apidocCodeCommentSpan">        /* falls through */
 </span>      case START_BOUNDARY:
-        if (index === boundaryLength - 2 &#x26;&#x26; c === HYPHEN) {
+        if (index === boundaryLength - 2 &amp;&amp; c === HYPHEN) {
           index = 1;
           state = CLOSE_BOUNDARY;
           break;
         } else if (index === boundaryLength - 2) {
-          if (c !== CR) return self.handleError(createError(400, &#x27;Expected CR Received &#x27; + c));
+          if (c !== CR) return self.handleError(createError(400, 'Expected CR Received ' + c));
           index++;
           break;
         } else if (index === boundaryLength - 1) {
-          if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+          if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
           index = 0;
           self.onParsePartBegin();
           state = HEADER_FIELD_START;
@@ -1694,7 +1687,7 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
         if (c === COLON) {
           if (index === 1) {
             // empty header field
-            self.handleError(createError(400, &#x27;Empty header field&#x27;));
+            self.handleError(createError(400, 'Empty header field'));
             return;
           }
           self.onParseHeaderField(buffer.slice(self.headerFieldMark, i));
@@ -1704,8 +1697,8 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
         }
 
         cl = lower(c);
-        if (cl &#x3c; A || cl &#x3e; Z) {
-          self.handleError(createError(400, &#x27;Expected alphabetic character, received &#x27; + c));
+        if (cl &lt; A || cl &gt; Z) {
+          self.handleError(createError(400, 'Expected alphabetic character, received ' + c));
           return;
         }
         break;
@@ -1724,11 +1717,11 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
         }
         break;
       case HEADER_VALUE_ALMOST_DONE:
-        if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+        if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
         state = HEADER_FIELD_START;
         break;
       case HEADERS_ALMOST_DONE:
-        if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+        if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
         var err = self.onParseHeadersEnd(i + 1);
         if (err) return self.handleError(err);
         state = PART_DATA_START;
@@ -1743,14 +1736,14 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
         if (index === 0) {
           // boyer-moore derrived algorithm to safely skip non-boundary data
           i += boundaryEnd;
-          while (i &#x3c; bufferLength &#x26;&#x26; !(buffer[i] in boundaryChars)) {
+          while (i &lt; bufferLength &amp;&amp; !(buffer[i] in boundaryChars)) {
             i += boundaryLength;
           }
           i -= boundaryEnd;
           c = buffer[i];
         }
 
-        if (index &#x3c; boundaryLength) {
+        if (index &lt; boundaryLength) {
           if (boundary[index] === c) {
             if (index === 0) {
               self.onParsePartData(buffer.slice(self.partDataMark, i));
@@ -1788,19 +1781,19 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
   this.partHeaders[this.headerField] = this.headerValue;
 
   var m;
-  if (this.headerField === &#x27;content-disposition&#x27;) {
-    if (m = this.headerValue.match(/\bname=&#x22;([^&#x22;]+)&#x22;/i)) {
+  if (this.headerField === 'content-disposition') {
+    if (m = this.headerValue.match(/\bname="([^"]+)"/i)) {
       this.partName = m[1];
     }
     this.partFilename = parseFilename(this.headerValue);
-  } else if (this.headerField === &#x27;content-transfer-encoding&#x27;) {
+  } else if (this.headerField === 'content-transfer-encoding') {
     this.partTransferEncoding = this.headerValue.toLowerCase();
   }
 
   this.headerFieldDecoder = new StringDecoder(this.encoding);
-  this.headerField = &#x27;&#x27;;
+  this.headerField = '';
   this.headerValueDecoder = new StringDecoder(this.encoding);
-  this.headerValue = &#x27;&#x27;;
+  this.headerValue = '';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   self.headerValueMark = i;
@@ -1815,7 +1808,7 @@ case HEADER_VALUE:
   }
   break;
 case HEADER_VALUE_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   state = HEADER_FIELD_START;
   break;
 ...</pre></li>
@@ -1843,7 +1836,7 @@ case HEADER_VALUE_ALMOST_DONE:
 if (c === COLON) {
   if (index === 1) {
     // empty header field
-    self.handleError(createError(400, &#x27;Empty header field&#x27;));
+    self.handleError(createError(400, 'Empty header field'));
     return;
   }
   self.<span class="apidocCodeKeywordSpan">onParseHeaderField</span>(buffer.slice(self.headerFieldMark, i));
@@ -1853,7 +1846,7 @@ if (c === COLON) {
 }
 
 cl = lower(c);
-if (cl &#x3c; A || cl &#x3e; Z) {
+if (cl &lt; A || cl &gt; Z) {
 ...</pre></li>
     </ul>
 
@@ -1889,7 +1882,7 @@ case HEADER_VALUE:
   }
   break;
 case HEADER_VALUE_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
 ...</pre></li>
     </ul>
 
@@ -1910,39 +1903,39 @@ case HEADER_VALUE_ALMOST_DONE:
     <li>description and source-code<pre class="apidocCodePre">onParseHeadersEnd = function (offset) {
   var self = this;
   switch(self.partTransferEncoding){
-    case &#x27;binary&#x27;:
-    case &#x27;7bit&#x27;:
-    case &#x27;8bit&#x27;:
-    self.partTransferEncoding = &#x27;binary&#x27;;
+    case 'binary':
+    case '7bit':
+    case '8bit':
+    self.partTransferEncoding = 'binary';
     break;
 
-    case &#x27;base64&#x27;: break;
+    case 'base64': break;
     default:
-    return createError(400, &#x27;unknown transfer-encoding: &#x27; + self.partTransferEncoding);
+    return createError(400, 'unknown transfer-encoding: ' + self.partTransferEncoding);
   }
 
   self.totalFieldCount += 1;
-  if (self.totalFieldCount &#x3e; self.maxFields) {
-    return createError(413, &#x27;maxFields &#x27; + self.maxFields + &#x27; exceeded.&#x27;);
+  if (self.totalFieldCount &gt; self.maxFields) {
+    return createError(413, 'maxFields ' + self.maxFields + ' exceeded.');
   }
 
   self.destStream = new stream.PassThrough();
-  self.destStream.on(&#x27;drain&#x27;, function() {
+  self.destStream.on('drain', function() {
     flushWriteCbs(self);
   });
   self.destStream.headers = self.partHeaders;
   self.destStream.name = self.partName;
   self.destStream.filename = self.partFilename;
   self.destStream.byteOffset = self.bytesReceived + offset;
-  var partContentLength = self.destStream.headers[&#x27;content-length&#x27;];
+  var partContentLength = self.destStream.headers['content-length'];
   self.destStream.byteCount = partContentLength ? parseInt(partContentLength, 10) :
     self.bytesExpected ? (self.bytesExpected - self.destStream.byteOffset -
       self.boundary.length - LAST_BOUNDARY_SUFFIX_LEN) :
     undefined;
 
-  if (self.destStream.filename == null &#x26;&#x26; self.autoFields) {
+  if (self.destStream.filename == null &amp;&amp; self.autoFields) {
     handleField(self, self.destStream);
-  } else if (self.destStream.filename != null &#x26;&#x26; self.autoFiles) {
+  } else if (self.destStream.filename != null &amp;&amp; self.autoFiles) {
     handleFile(self, self.destStream);
   } else {
     handlePart(self, self.destStream);
@@ -1951,11 +1944,11 @@ case HEADER_VALUE_ALMOST_DONE:
     <li>example usage<pre class="apidocCodePre">...
   break;
 case HEADER_VALUE_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   state = HEADER_FIELD_START;
   break;
 case HEADERS_ALMOST_DONE:
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   var err = self.<span class="apidocCodeKeywordSpan">onParseHeadersEnd</span>(i + 1);
   if (err) return self.handleError(err);
   state = PART_DATA_START;
@@ -1986,11 +1979,11 @@ case PART_DATA_START:
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 } else if (index === boundaryLength - 2) {
-  if (c !== CR) return self.handleError(createError(400, &#x27;Expected CR Received &#x27; + c));
+  if (c !== CR) return self.handleError(createError(400, 'Expected CR Received ' + c));
   index++;
   break;
 } else if (index === boundaryLength - 1) {
-  if (c !== LF) return self.handleError(createError(400, &#x27;Expected LF Received &#x27; + c));
+  if (c !== LF) return self.handleError(createError(400, 'Expected LF Received ' + c));
   index = 0;
   self.<span class="apidocCodeKeywordSpan">onParsePartBegin</span>();
   state = HEADER_FIELD_START;
@@ -2018,8 +2011,8 @@ break;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">onParsePartData = function (b) {
-  if (this.partTransferEncoding === &#x27;base64&#x27;) {
-    this.backpressure = ! this.destStream.write(b.toString(&#x27;ascii&#x27;), &#x27;base64&#x27;);
+  if (this.partTransferEncoding === 'base64') {
+    this.backpressure = ! this.destStream.write(b.toString('ascii'), 'base64');
   } else {
     this.backpressure = ! this.destStream.write(b);
   }
@@ -2029,7 +2022,7 @@ break;
   c = buffer[i];
 }
 
-if (index &#x3c; boundaryLength) {
+if (index &lt; boundaryLength) {
   if (boundary[index] === c) {
     if (index === 0) {
       self.<span class="apidocCodeKeywordSpan">onParsePartData</span>(buffer.slice(self.partDataMark, i));
@@ -2118,10 +2111,10 @@ if (index &#x3c; boundaryLength) {
 
       // wait for req events to fire
       process.nextTick(function() {
-        if (waitend &#x26;&#x26; req.readable) {
+        if (waitend &amp;&amp; req.readable) {
           // dump rest of request
           req.resume();
-          req.once(&#x27;end&#x27;, done);
+          req.once('end', done);
           return;
         }
 
@@ -2131,20 +2124,20 @@ if (index &#x3c; boundaryLength) {
 
     var fields = {};
     var files = {};
-    self.on(&#x27;error&#x27;, function(err) {
+    self.on('error', function(err) {
       end(function() {
         cb(err);
       });
     });
-    self.on(&#x27;field&#x27;, function(name, value) {
+    self.on('field', function(name, value) {
       var fieldsArray = fields[name] || (fields[name] = []);
       fieldsArray.push(value);
     });
-    self.on(&#x27;file&#x27;, function(name, file) {
+    self.on('file', function(name, file) {
       var filesArray = files[name] || (files[name] = []);
       filesArray.push(file);
     });
-    self.on(&#x27;close&#x27;, function() {
+    self.on('close', function() {
       end(function() {
         cb(null, fields, files);
       });
@@ -2154,43 +2147,43 @@ if (index &#x3c; boundaryLength) {
   self.handleError = handleError;
   self.bytesExpected = getBytesExpected(req.headers);
 
-  req.on(&#x27;end&#x27;, onReqEnd);
-  req.on(&#x27;error&#x27;, function(err) {
+  req.on('end', onReqEnd);
+  req.on('error', function(err) {
     waitend = false;
     handleError(err);
   });
-  req.on(&#x27;aborted&#x27;, onReqAborted);
+  req.on('aborted', onReqAborted);
 
   var state = req._readableState;
-  if (req._decoder || (state &#x26;&#x26; (state.encoding || state.decoder))) {
+  if (req._decoder || (state &amp;&amp; (state.encoding || state.decoder))) {
     // this is a binary protocol
     // if an encoding is set, input is likely corrupted
-    validationError(new Error(&#x27;request encoding must not be set&#x27;));
+    validationError(new Error('request encoding must not be set'));
     return;
   }
 
-  var contentType = req.headers[&#x27;content-type&#x27;];
+  var contentType = req.headers['content-type'];
   if (!contentType) {
-    validationError(createError(415, &#x27;missing content-type header&#x27;));
+    validationError(createError(415, 'missing content-type header'));
     return;
   }
 
   var m = CONTENT_TYPE_RE.exec(contentType);
   if (!m) {
-    validationError(createError(415, &#x27;unsupported content-type&#x27;));
+    validationError(createError(415, 'unsupported content-type'));
     return;
   }
 
   var boundary;
   CONTENT_TYPE_PARAM_RE.lastIndex = m.index + m[0].length - 1;
   while ((m = CONTENT_TYPE_PARAM_RE.exec(contentType))) {
-    if (m[1].toLowerCase() !== &#x27;boundary&#x27;) continue;
+    if (m[1].toLowerCase() !== 'boundary') continue;
     boundary = m[2] || m[3];
     break;
   }
 
   if (!boundary) {
-    validationError(createError(400, &#x27;content-type missing boundary&#x27;));
+    validationError(createError(400, 'content-type missing boundary'));
     return;
   }
 
@@ -2199,8 +2192,8 @@ if (index &#x3c; boundaryLength) {
 
   function onReqAborted() {
     waitend = false;
-    self.emit(&#x27;aborted&#x27;);
-    handleError(new Error(&#x22;Request aborted&#x22;));
+    self.emit('aborted');
+    handleError(new Error("Request aborted"));
   }
 
   function onReqEnd() {
@@ -2211,8 +2204,8 @@ if (index &#x3c; boundaryLength) {
     var first = !self.error;
     if (first) {
       self.error = err;
-      req.removeListener(&#x27;aborted&#x27;, onReqAborted);
-      req.removeListener(&#x27;end&#x27;, onReqEnd);
+      req.removeListener('aborted', onReqAborted);
+      req.removeListener('end', onReqEnd);
       if (self.destStream) {
         errorEventQueue(self, self.destStream, err);
       }
@@ -2221,7 +2214,7 @@ if (index &#x3c; boundaryLength) {
     cleanupOpenFiles(self);
 
     if (first) {
-      self.emit(&#x27;error&#x27;, err);
+      self.emit('error', err);
     }
   }
 
@@ -2231,16 +2224,16 @@ if (index &#x3c; boundaryLength) {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var util = require(&#x27;util&#x27;);
+var util = require('util');
 
 http.createServer(function(req, res) {
-if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;) {
+if (req.url === '/upload' &amp;&amp; req.method === 'POST') {
   // parse a file upload
   var form = new multiparty.Form();
 
   form.<span class="apidocCodeKeywordSpan">parse</span>(req, function(err, fields, files) {
-    res.writeHead(200, {&#x27;content-type&#x27;: &#x27;text/plain&#x27;});
-    res.write(&#x27;received upload:\n\n&#x27;);
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.write('received upload:\n\n');
     res.end(util.inspect({fields: fields, files: files}));
   });
 
@@ -2258,3 +2251,4 @@ if (req.url === &#x27;/upload&#x27; &#x26;&#x26; req.method === &#x27;POST&#x27;
     ]
 </div>
 </div>
+</body></html>
