@@ -1,4 +1,7 @@
-# api documentation for  [multiparty (v4.1.3)](https://github.com/pillarjs/multiparty#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-multiparty.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-multiparty) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-multiparty.svg)](https://travis-ci.org/npmdoc/node-npmdoc-multiparty)
+# npmdoc-multiparty
+
+#### basic api documentation for  [multiparty (v4.1.3)](https://github.com/pillarjs/multiparty#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-multiparty.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-multiparty) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-multiparty.svg)](https://travis-ci.org/npmdoc/node-npmdoc-multiparty)
+
 #### multipart/form-data parser which supports streaming
 
 [![NPM](https://nodei.co/npm/multiparty.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/multiparty)
@@ -77,7 +80,8 @@
         "test-cov": "istanbul cover test/test.js",
         "test-travis": "istanbul cover test/test.js --report lcovonly"
     },
-    "version": "4.1.3"
+    "version": "4.1.3",
+    "bin": {}
 }
 ```
 
